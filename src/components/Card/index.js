@@ -1,6 +1,5 @@
-//import { Button, Table } from "@mantine/core";
 import React from "react";
-import { useFormik } from "formik";
+import { Formik, Field, Form } from "formik";
 import DatePicker from "react-datepicker";
 import "./bootstrap.min.css";
 import "./style.css";
@@ -8,58 +7,62 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const CardComponent = () => {
 
-	const formik = useFormik({
-		initialValues: {
-			name: "",
-			email: "",
-			birthdate: "",
-			appointmentDate: ""
-		},
-		onSubmit: values => {
-			alert(JSON.stringify(values, null, 2));
-		},
-	});
-
 	const startDate = new Date();
-
+	const onSubmit = (values) =>{
+		console.log("SUBMIT", values);
+	};
+	const validate = (values) => {
+		const errors = {};
+		if(!values.name){
+			errors.name = "Name is required";
+		}
+		if(!values.email){
+			errors.email = "Email is required";
+		}
+		if(!values.birthdate){
+			errors.birthdate = "Birthdate is required";
+		}
+		return errors;
+	};
 	return (
-		<form onSubmit={formik.handleSubmit}>
-
-			<label htmlFor="name">Name</label>
-			<input
-				id="name"
-				name="name"
-				type="text"
-				onChange={formik.handleChange}
-				value={formik.values.name}
-			/>
-
-			<label htmlFor="email">Email Address</label>
-			<input
-				id="email"
-				name="email"
-				type="email"
-				onChange={formik.handleChange}
-				value={formik.values.email}
-			/>
-
-			<label htmlFor="birthdate">Birthdate</label>
-			<input
-				id="birthdate"
-				name="birthdate"
-				type="date"
-				onChange={formik.handleChange}
-				value={formik.values.birthdate}
-			/>
-
-			<DatePicker id="appointmentDate" selected={startDate} onChange={formik.handleChange} value={formik.values.appointmentDate} showTimeSelect dateFormat="Pp"/>
-
-			<button type="submit">Submit</button>
-		</form>
+		<div>
+			<Formik 
+				validateOnMount
+				validate={validate}
+				onSubmit={onSubmit}
+				initialValues={{name: "",
+					email: "",
+					birthdate: "",
+					appointmentDate: ""}	
+				}
+			>
+				{({ values, errors, handleChange}) => (
+					<Form>
+						<div>
+							<label htmlFor="name">Name</label>
+							<Field id="name" name="name" type="text"/>
+							{ errors.name && ( <span>{errors.name}</span> ) } 
+						</div>
+						<div>
+							<label htmlFor="email">Email Address</label>
+							<Field id="email" name="email" type="email"/>
+							{ errors.email && ( <span>{errors.email}</span> ) } 
+						</div>
+						<div>
+							<label htmlFor="birthdate">Birthdate</label>
+							<Field id="birthdate" name="birthdate" type="date"/>
+							{ errors.birthdate && ( <span>{errors.birthdate}</span> ) } 
+						</div>
+						<div>
+							<DatePicker id="appointmentDate" selected={startDate} onChange={handleChange} value={values.appointmentDate} showTimeSelect dateFormat="Pp"/>
+						</div>
+						<button type="submit">Submit</button>
+					</Form>
+				)}
+			</Formik>
+		</div>
+		
 	);
 };
-
-
-
 
 export default CardComponent;
