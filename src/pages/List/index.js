@@ -5,6 +5,7 @@ const List = () => {
 	console.log("List");
 	return (
 		<Table />
+		
 	);
 };
 
