@@ -6,7 +6,9 @@ import Table from "../Table";
 
 const ListView = (
 	columns,
-	onClickActionButton = () => {},
+	onClickActionButton = (item) => {
+		alert(item);
+	},
 ) => {
 	const [rows, setRows] = useState([]);
 
@@ -35,7 +37,7 @@ const ListView = (
 
 	return (
 		<>
-			<Table columns={columns} rows={rows} actions={actions}/>
+			<Table columns={columns.columns} rows={rows} actions={actions}/>
 		</>
 	);
 };
