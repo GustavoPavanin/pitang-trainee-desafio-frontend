@@ -74,7 +74,7 @@ const CardForm = () => {
 								/>
 								<ErrorMessage name="appointmentDate"/>
 							</div>
-							<Button type="submit" disabled={!isValid} variant="outlined">Submit</Button>
+							<Button type="submit" disabled={!isValid} variant="contained">Submit</Button>
 						</Form>
 					)}
 				</Formik>
