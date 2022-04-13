@@ -1,29 +1,41 @@
 /* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
+import { Pencil, Trash } from "tabler-icons-react";
 import axios from "../../services/api";
 import Table from "../Table";
 
-const ListView = () => {
+const ListView = (
+	columns,
+	onClickActionButton = () => {},
+) => {
 	const [rows, setRows] = useState([]);
+
+	const onDelete = (row) => {
+		alert(row.id);
+	};
+
+	const actions = [
+		{
+			leftIcon: <Pencil />,
+			onClick: (item) => onClickActionButton(item),
+		},
+		{
+			mt: 8,
+			color: "red",
+			leftIcon: <Trash />,
+			onClick: onDelete,
+		},
+	];
 
 	useEffect(() => {
 		axios.get()
 			.then((response) => setRows(response.data.list))
 			.catch(console.error);
 	}, []);
+
 	return (
 		<>
-			<Table 
-				columns={[
-					{ key: "id", value: "ID" },
-					{ key: "name", value: "Name" },
-					{ key: "email", value: "Email" },
-					{ key: "birthdate", value: "Birthdate" },
-					{ key: "appointmentDate", value: "Appointment Date" },
-					{ key: "appointment", value: "Appointment Hour" },
-				]}
-				rows={rows}/>
+			<Table columns={columns} rows={rows} actions={actions}/>
 		</>
 	);
 };
