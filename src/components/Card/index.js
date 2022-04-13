@@ -2,7 +2,6 @@ import React , {useState} from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import DatePicker from "react-datepicker";
 import Schema from "../../schema";
-import "./style.css";
 import "react-datepicker/dist/react-datepicker.css";
 
 const CardComponent = () => {
