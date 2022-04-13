@@ -1,11 +1,9 @@
 import React from "react";
-import Table from "../../components/Table";
+import ListView from "../../components/ListView";
 
 const List = () => {
-	console.log("List");
 	return (
-		<Table />
-		
+		<ListView />
 	);
 };
 
