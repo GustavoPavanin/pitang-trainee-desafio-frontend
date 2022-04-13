@@ -3,8 +3,18 @@
 /* eslint-disable react/jsx-key */
 //import { Button, Table } from "@mantine/core";
 import React from "react";
-import {Button, Paper, TableRow, TableHead, TableContainer, TableBody, TableCell, Table } from "@mui/material";
+import {Button, Paper, TableRow, TableHead, TableContainer, TableBody, TableCell, Table, styled } from "@mui/material";
 
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+	"&:nth-of-type(odd)": {
+		backgroundColor: theme.palette.action.hover,
+	},
+	// hide last border
+	"&:last-child td, &:last-child th": {
+		border: 0,
+	},
+}));
+  
 const TableComponent = ({ rows = []}) => {
 
 	const onClick = (values) =>{
@@ -27,14 +37,14 @@ const TableComponent = ({ rows = []}) => {
 					</TableHead>
 					<TableBody>
 						{rows.map((row) => (
-							<TableRow>
+							<StyledTableRow>
 								<TableCell align="center">{row.name}</TableCell>
 								<TableCell align="center">{row.email}</TableCell>
 								<TableCell align="center">{row.birthdate}</TableCell>
 								<TableCell align="center">{row.appointmentDate}</TableCell>
 								<TableCell align="center">{row.appointmentHour}</TableCell>
 								<TableCell align="center"><Button onClick={() => onClick(row.id)} variant="outlined">Confirm</Button></TableCell>
-							</TableRow>
+							</StyledTableRow>
 						))}
 					</TableBody>
 				</Table>
