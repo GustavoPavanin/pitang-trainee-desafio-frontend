@@ -3,47 +3,63 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import DatePicker from "react-datepicker";
 import Schema from "../../schema";
 import "react-datepicker/dist/react-datepicker.css";
-import { Card, TextField, CardContent, Typography, Button } from "@mui/material";
+import { TextField, Typography, Button, Box } from "@mui/material";
 
+
+  
 const CardForm = () => {
 	const currentDate = new Date();
 	const [appointmentDate, setAppointmentDate] = useState(new Date());
 	const [birthdate, setBirthdate] = useState(new Date());
+	const [appointmentHour, setAppointmentHour] = useState();
 	const onSubmit = (values) =>{
 		console.log("SUBMIT", JSON.stringify(values, null, 2));
 		alert(JSON.stringify(values, null, 2));
 	};
 	return (
-		<Card>
-			<CardContent>
-				<Typography variant="h4">Schedule your vaccination date</Typography>
-				<Formik 
-					validationSchema={Schema}
-					onSubmit={onSubmit}
-					validateOnMount
-					initialValues={{
-						name: "",
-						email: "",
-						birthdate: "",
-						appointmentDate: ""}	
-					}
-				>
-					{({ values,  isValid, setFieldValue}) => (
+		<Box pt={1} >
+			<Box pt={1} pb={3}>
+				<Typography variant="h4">Agendamento</Typography>
+				<Typography variant="h6" >Preencha todos os campos a baixo para prosseguirmos com o seu agendamento.</Typography>
+			</Box>
+			
+			<Formik 
+				validationSchema={Schema}
+				onSubmit={onSubmit}
+				validateOnMount
+				initialValues={{
+					name: "",
+					email: "",
+					birthdate: "",
+					appointmentDate: "",
+					appointmentHour: ""}	
+				}
+			>
+				{({ values,  isValid, setFieldValue}) => (
+
+					<Box pl={5}>
 						<Form>
-							<div>
+							
+							<Box pt={1}>
 								<Field id="name" name="name" type="text" 
-									as={TextField} label="Name" variant="filled" sx={{ m: 1}}
+									as={TextField} label="Nome" variant="filled" 
+									sx={{ display: "flex" }}
 								/>
-								<ErrorMessage name="name" />
-							</div>
-							<div>
+								<ErrorMessage name="name">
+									{ msg => <div style={{ color: "red" }}>{msg}</div> }
+								</ErrorMessage>
+							</Box>
+							<Box pt={1.5}>
 								<Field id="email" name="email" type="email"
-									as={TextField} label="Email Address" variant="filled" sx={{ m: 1}}
+									as={TextField} label="Email" variant="filled" 
+									sx={{ display: "flex" }}
 								/>
-								<ErrorMessage name="email" />
-							</div>
-							<div>
-								<label htmlFor="birthdate">Birthdate</label>
+								<ErrorMessage name="email" >
+									{ msg => <div style={{ color: "red" }}>{msg}</div> }
+								</ErrorMessage>
+							</Box>
+							<Box pt={1.5}>
+								<label htmlFor="birthdate">Data de Nascimento</label>
 								<DatePicker 
 									id="birthdate" 
 									name="birthdate" 
@@ -57,10 +73,12 @@ const CardForm = () => {
 									}}
 									className={TextField}
 								/>
-								<ErrorMessage name="birthdate"/>
-							</div>
-							<div>
-								<label htmlFor="appointmentDate">Appointment Date</label>
+								<ErrorMessage name="birthdate">
+									{ msg => <div style={{ color: "red" }}>{msg}</div> }
+								</ErrorMessage>
+							</Box>
+							<Box pt={1.5}>
+								<label htmlFor="appointmentDate">Data de Agendamento</label>
 								<DatePicker id="appointmentDate" selected={appointmentDate} 
 									onChange={(value) => {
 										setAppointmentDate(Date.parse(value));
@@ -69,17 +87,40 @@ const CardForm = () => {
 									}}
 									minDate={currentDate}
 									value={values.appointmentDate} 
-									showTimeSelect 
-									dateFormat="Pp"
 								/>
-								<ErrorMessage name="appointmentDate"/>
-							</div>
-							<Button type="submit" disabled={!isValid} variant="contained">Submit</Button>
+								<ErrorMessage name="appointmentDate">
+									{ msg => <div style={{ color: "red" }}>{msg}</div> }
+								</ErrorMessage>
+							</Box>
+							
+							<Box pt={1.5} >
+								<label htmlFor="appointmentHour">Horário de Agendamento</label>
+								<DatePicker id="appointmentHour" selected={appointmentHour} 
+									onChange={(value) => {
+										setAppointmentHour(Date.parse(value));
+										setFieldValue("appointmentHour", value);
+										console.log(appointmentHour);
+										
+									}}
+									showTimeSelect
+									showTimeSelectOnly
+									timeIntervals={60}
+									timeCaption="Time"
+									dateFormat="h:mm aa"
+									value={values.appointmentHour} 
+								/>
+
+								<ErrorMessage name="appointmentHour">
+									{ msg => <div style={{ color: "red" }}>{msg}</div> }
+								</ErrorMessage>
+							</Box>
+							<Box pt={1.5}><Button type="submit" disabled={!isValid} variant="contained" >Submit</Button></Box>
+							
 						</Form>
-					)}
-				</Formik>
-			</CardContent>
-		</Card>
+					</Box>
+				)}
+			</Formik>
+		</Box>
 		
 	);
 };
