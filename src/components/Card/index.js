@@ -3,8 +3,10 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import DatePicker from "react-datepicker";
 import Schema from "../../schema";
 import "react-datepicker/dist/react-datepicker.css";
-import { Card, TextField, CardContent, Typography, Button, Box } from "@mui/material";
+import { TextField, Typography, Button, Box } from "@mui/material";
 
+
+  
 const CardForm = () => {
 	const currentDate = new Date();
 	const [appointmentDate, setAppointmentDate] = useState(new Date());
@@ -15,22 +17,26 @@ const CardForm = () => {
 		alert(JSON.stringify(values, null, 2));
 	};
 	return (
-		<Card>
-			<CardContent>
+		<Box pt={1} >
+			<Box pt={1} pb={3}>
 				<Typography variant="h4">Schedule your vaccination date</Typography>
-				<Formik 
-					validationSchema={Schema}
-					onSubmit={onSubmit}
-					validateOnMount
-					initialValues={{
-						name: "",
-						email: "",
-						birthdate: "",
-						appointmentDate: "",
-						appointmentHour: ""}	
-					}
-				>
-					{({ values,  isValid, setFieldValue}) => (
+			</Box>
+			
+			<Formik 
+				validationSchema={Schema}
+				onSubmit={onSubmit}
+				validateOnMount
+				initialValues={{
+					name: "",
+					email: "",
+					birthdate: "",
+					appointmentDate: "",
+					appointmentHour: ""}	
+				}
+			>
+				{({ values,  isValid, setFieldValue}) => (
+
+					<Box pl={5}>
 						<Form>
 							
 							<Box pt={1}>
@@ -39,13 +45,13 @@ const CardForm = () => {
 								/>
 								<ErrorMessage name="name" />
 							</Box>
-							<Box pt={2}>
+							<Box pt={1.5}>
 								<Field id="email" name="email" type="email"
 									as={TextField} label="Email Address" variant="filled" 
 								/>
 								<ErrorMessage name="email" />
 							</Box>
-							<Box pt={2}>
+							<Box pt={1.5}>
 								<label htmlFor="birthdate">Birthdate</label>
 								<DatePicker 
 									id="birthdate" 
@@ -62,7 +68,7 @@ const CardForm = () => {
 								/>
 								<ErrorMessage name="birthdate"/>
 							</Box>
-							<Box pt={2}>
+							<Box pt={1.5}>
 								<label htmlFor="appointmentDate">Appointment Date</label>
 								<DatePicker id="appointmentDate" selected={appointmentDate} 
 									onChange={(value) => {
@@ -75,7 +81,8 @@ const CardForm = () => {
 								/>
 								<ErrorMessage name="appointmentDate"/>
 							</Box>
-							<Box pt={2}>
+							
+							<Box pt={1.5} >
 								<label htmlFor="appointmentHour">Appointment Hour</label>
 								<DatePicker id="appointmentHour" selected={appointmentHour} 
 									onChange={(value) => {
@@ -94,13 +101,13 @@ const CardForm = () => {
 
 								<ErrorMessage name="appointmentHour"/>
 							</Box>
-							<Box pt={2}><Button type="submit" disabled={!isValid} variant="contained">Submit</Button></Box>
+							<Box pt={1.5}><Button type="submit" disabled={!isValid} variant="contained">Submit</Button></Box>
 							
 						</Form>
-					)}
-				</Formik>
-			</CardContent>
-		</Card>
+					</Box>
+				)}
+			</Formik>
+		</Box>
 		
 	);
 };
