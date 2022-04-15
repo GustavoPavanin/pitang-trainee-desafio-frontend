@@ -3,12 +3,13 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import DatePicker from "react-datepicker";
 import Schema from "../../schema";
 import "react-datepicker/dist/react-datepicker.css";
-import { Card, TextField, CardContent, Typography, Button } from "@mui/material";
+import { Card, TextField, CardContent, Typography, Button, Box } from "@mui/material";
 
 const CardForm = () => {
 	const currentDate = new Date();
 	const [appointmentDate, setAppointmentDate] = useState(new Date());
 	const [birthdate, setBirthdate] = useState(new Date());
+	const [appointmentHour, setAppointmentHour] = useState();
 	const onSubmit = (values) =>{
 		console.log("SUBMIT", values);
 		alert(JSON.stringify(values, null, 2));
@@ -25,24 +26,26 @@ const CardForm = () => {
 						name: "",
 						email: "",
 						birthdate: "",
-						appointmentDate: ""}	
+						appointmentDate: "",
+						appointmentHour: ""}	
 					}
 				>
 					{({ values,  isValid, setFieldValue}) => (
 						<Form>
-							<div>
+							
+							<Box pt={1}>
 								<Field id="name" name="name" type="text" 
-									as={TextField} label="Name" variant="filled" sx={{ m: 1}}
+									as={TextField} label="Name" variant="filled" 
 								/>
 								<ErrorMessage name="name" />
-							</div>
-							<div>
+							</Box>
+							<Box pt={2}>
 								<Field id="email" name="email" type="email"
-									as={TextField} label="Email Address" variant="filled" sx={{ m: 1}}
+									as={TextField} label="Email Address" variant="filled" 
 								/>
 								<ErrorMessage name="email" />
-							</div>
-							<div>
+							</Box>
+							<Box pt={2}>
 								<label htmlFor="birthdate">Birthdate</label>
 								<DatePicker 
 									id="birthdate" 
@@ -58,8 +61,8 @@ const CardForm = () => {
 									className={TextField}
 								/>
 								<ErrorMessage name="birthdate"/>
-							</div>
-							<div>
+							</Box>
+							<Box pt={2}>
 								<label htmlFor="appointmentDate">Appointment Date</label>
 								<DatePicker id="appointmentDate" selected={appointmentDate} 
 									onChange={(value) => {
@@ -69,12 +72,30 @@ const CardForm = () => {
 									}}
 									minDate={currentDate}
 									value={values.appointmentDate} 
-									showTimeSelect 
-									dateFormat="Pp"
 								/>
 								<ErrorMessage name="appointmentDate"/>
-							</div>
-							<Button type="submit" disabled={!isValid} variant="contained">Submit</Button>
+							</Box>
+							<Box pt={2}>
+								<label htmlFor="appointmentHour">Appointment Hour</label>
+								<DatePicker id="appointmentHour" selected={appointmentHour} 
+									onChange={(value) => {
+										setAppointmentHour(Date.parse(value));
+										setFieldValue("appointmentHour", value);
+										console.log(appointmentHour);
+										
+									}}
+									showTimeSelect
+									showTimeSelectOnly
+									timeIntervals={60}
+									timeCaption="Time"
+									dateFormat="h:mm aa"
+									value={values.appointmentHour} 
+								/>
+
+								<ErrorMessage name="appointmentHour"/>
+							</Box>
+							<Box pt={2}><Button type="submit" disabled={!isValid} variant="contained">Submit</Button></Box>
+							
 						</Form>
 					)}
 				</Formik>
