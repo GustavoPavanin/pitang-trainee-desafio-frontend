@@ -10,7 +10,7 @@ const CardForm = () => {
 	const [appointmentDate, setAppointmentDate] = useState(new Date());
 	const [birthdate, setBirthdate] = useState(new Date());
 	const onSubmit = (values) =>{
-		console.log("SUBMIT", values);
+		console.log("SUBMIT", JSON.stringify(values, null, 2));
 		alert(JSON.stringify(values, null, 2));
 	};
 	return (
