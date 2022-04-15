@@ -19,7 +19,8 @@ const CardForm = () => {
 	return (
 		<Box pt={1} >
 			<Box pt={1} pb={3}>
-				<Typography variant="h4">Schedule your vaccination date</Typography>
+				<Typography variant="h4">Agendamento</Typography>
+				<Typography variant="h6" >Preencha todos os campos a baixo para prosseguirmos com o seu agendamento.</Typography>
 			</Box>
 			
 			<Formik 
@@ -41,18 +42,24 @@ const CardForm = () => {
 							
 							<Box pt={1}>
 								<Field id="name" name="name" type="text" 
-									as={TextField} label="Name" variant="filled" 
+									as={TextField} label="Nome" variant="filled" 
+									sx={{ display: "flex" }}
 								/>
-								<ErrorMessage name="name" />
+								<ErrorMessage name="name">
+									{ msg => <div style={{ color: "red" }}>{msg}</div> }
+								</ErrorMessage>
 							</Box>
 							<Box pt={1.5}>
 								<Field id="email" name="email" type="email"
-									as={TextField} label="Email Address" variant="filled" 
+									as={TextField} label="Email" variant="filled" 
+									sx={{ display: "flex" }}
 								/>
-								<ErrorMessage name="email" />
+								<ErrorMessage name="email" >
+									{ msg => <div style={{ color: "red" }}>{msg}</div> }
+								</ErrorMessage>
 							</Box>
 							<Box pt={1.5}>
-								<label htmlFor="birthdate">Birthdate</label>
+								<label htmlFor="birthdate">Data de Nascimento</label>
 								<DatePicker 
 									id="birthdate" 
 									name="birthdate" 
@@ -66,10 +73,12 @@ const CardForm = () => {
 									}}
 									className={TextField}
 								/>
-								<ErrorMessage name="birthdate"/>
+								<ErrorMessage name="birthdate">
+									{ msg => <div style={{ color: "red" }}>{msg}</div> }
+								</ErrorMessage>
 							</Box>
 							<Box pt={1.5}>
-								<label htmlFor="appointmentDate">Appointment Date</label>
+								<label htmlFor="appointmentDate">Data de Agendamento</label>
 								<DatePicker id="appointmentDate" selected={appointmentDate} 
 									onChange={(value) => {
 										setAppointmentDate(Date.parse(value));
@@ -79,11 +88,13 @@ const CardForm = () => {
 									minDate={currentDate}
 									value={values.appointmentDate} 
 								/>
-								<ErrorMessage name="appointmentDate"/>
+								<ErrorMessage name="appointmentDate">
+									{ msg => <div style={{ color: "red" }}>{msg}</div> }
+								</ErrorMessage>
 							</Box>
 							
 							<Box pt={1.5} >
-								<label htmlFor="appointmentHour">Appointment Hour</label>
+								<label htmlFor="appointmentHour">Horário de Agendamento</label>
 								<DatePicker id="appointmentHour" selected={appointmentHour} 
 									onChange={(value) => {
 										setAppointmentHour(Date.parse(value));
@@ -99,9 +110,11 @@ const CardForm = () => {
 									value={values.appointmentHour} 
 								/>
 
-								<ErrorMessage name="appointmentHour"/>
+								<ErrorMessage name="appointmentHour">
+									{ msg => <div style={{ color: "red" }}>{msg}</div> }
+								</ErrorMessage>
 							</Box>
-							<Box pt={1.5}><Button type="submit" disabled={!isValid} variant="contained">Submit</Button></Box>
+							<Box pt={1.5}><Button type="submit" disabled={!isValid} variant="contained" >Submit</Button></Box>
 							
 						</Form>
 					</Box>
