@@ -1,9 +1,11 @@
 import { Container, Box, Typography, Button } from "@mui/material";
 import React from "react";
+import "./style.css";
 //import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import Header from "../../Components/Header";
 import Ilustracao from "../../Assets/Images/Ilustracao_Home.svg";
+
 const titulo = {
 	fontFamily: "Arial",
 	fontStyle:" normal",
@@ -29,6 +31,7 @@ const ilustracao = {
 	left: "800px",
 	top: "15px"
 };
+
 const Home = () => {
 	return (
 		<Container >
@@ -42,7 +45,9 @@ const Home = () => {
 					O cuidado com a saúde é extremamente importante. Por isso, manter a vacinação em dia deve ser prioridade. Não descuide da sua saúde, vacine-se!
 					</Typography>
 				</Box>
-				<Button sx={{backgroundColor: "#1AE1D6", mt: 3}} >
+				<Button sx={{backgroundColor: "#1AE1D6", mt: 3, "&:hover": {
+					background: "#1AE1F6",
+				}}} >
 					<Link style={{ color : "#022D90", textDecoration: "none"}} to="/appointment">Agendar minha vacina</Link>
 				</Button>
 				<Box>
