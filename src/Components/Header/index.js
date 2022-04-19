@@ -18,7 +18,7 @@ const Header = () => {
 						<Link to="/"><img src={LogoHeader} alt="logo" width="80%" height="73px"/></Link>
 					</Toolbar>
 					<Typography variant="h6" component="div" sx={{ flexGrow: 1, color: "#022D90", }} />
-					<Button sx={{ color: "#022D90", mr: 2}} ><Link style={{ color :"#022D90", textDecoration: "none"}} to="/list">Ver Agendamentos</Link></Button>
+					<Button sx={{ color: "#022D90", mr: 3}} ><Link style={{ color :"#022D90", textDecoration: "none"}} to="/list">Ver Agendamentos</Link></Button>
 					<Button variant="contained" sx={{backgroundColor: "#022D90", mr: 6}} ><Link style={{ color :"white", textDecoration: "none"}} to="/appointment">Agendar</Link></Button>
 				</Toolbar>
 			</AppBar>
