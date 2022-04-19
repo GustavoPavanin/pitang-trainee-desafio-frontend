@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useEffect, useState } from "react";
-import axios from "../../services/api";
+import axios from "../../Services/api";
 import Table from "../Table";
 
 const ListView = (

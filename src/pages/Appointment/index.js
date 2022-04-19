@@ -1,11 +1,12 @@
 import { Container } from "@mui/material";
 import React from "react";
-//import { useFormik } from "formik";
-import Card from "../../components/Card";
+import Header from "../../Components/Header";
+import Card from "../../Components/Card";
 
 const Appointment = () => {
 	return (
 		<Container>
+			<Header />
 			<Card />
 		</Container>
 		
