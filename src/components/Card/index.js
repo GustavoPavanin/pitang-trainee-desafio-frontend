@@ -1,9 +1,12 @@
+/* eslint-disable react/prop-types */
 import React , {useState} from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import DatePicker from "react-datepicker";
 import Schema from "../../schema";
 import "react-datepicker/dist/react-datepicker.css";
-import { TextField, Typography, Button, Box } from "@mui/material";
+import { TextField, Typography, Button, Box} from "@mui/material";
+import axios from "../../Services/api";
+import localStorePost from "../../Validation/localStorePost.js";
 
 const titulo = {
 	fontFamily: "Arial",
@@ -27,10 +30,20 @@ const CardForm = () => {
 	const [appointmentDate, setAppointmentDate] = useState(new Date());
 	const [birthdate, setBirthdate] = useState(new Date());
 	const [appointmentHour, setAppointmentHour] = useState();
-	const onSubmit = (values) =>{
-		console.log("SUBMIT", JSON.stringify(values, null, 2));
-		alert(JSON.stringify(values, null, 2));
+
+	const onSubmit = async (values) => {
+		console.log(JSON.stringify(values, null, 2));
+		await axios.post("", values)
+			.then((response) => {
+				alert(response.data.message);
+				localStorePost(response.data.data);
+			})
+			.catch((error) => {
+				alert(error.response.data.message);
+				console.log({ message: error.response.data.message}); //Logs a string: Error: Request failed with status code 404
+			});
 	};
+
 	return (
 		<Box pt={1} >
 			<Box pt={1} pb={3}>
@@ -100,6 +113,7 @@ const CardForm = () => {
 										setFieldValue("appointmentDate", value);
 										console.log(appointmentDate);
 									}}
+									excludeDates={[]}
 									minDate={currentDate}
 									value={values.appointmentDate} 
 								/>
@@ -132,7 +146,8 @@ const CardForm = () => {
 							<Box pt={1.5}><Button type="submit" disabled={!isValid} variant="contained" sx={{backgroundColor: "#1AE1D6", color : "#022D90"}}>Submit</Button></Box>
 							
 						</Form>
-					</Box>
+
+					</Box>	
 				)}
 			</Formik>
 		</Box>
