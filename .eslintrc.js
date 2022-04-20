@@ -36,6 +36,7 @@ module.exports = {
 		],
 		"space-before-function-paren": [
 			"error", "always"
-		]
+		],
+		"react/prop-types": "off"
 	}
 };
