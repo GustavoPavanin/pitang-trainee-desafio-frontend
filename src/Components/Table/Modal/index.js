@@ -57,8 +57,8 @@ const Modal = (props) => {
 								/>
 							</DialogContent>
 							<DialogActions>
-								<Button onClick={handleClose}>Cancelar</Button>
-								<Button type="submit">Enviar</Button>
+								<Button onClick={handleClose} >Cancelar</Button>
+								<Button type="submit" >Enviar</Button>
 							</DialogActions>
 						</Form>
 					)}
