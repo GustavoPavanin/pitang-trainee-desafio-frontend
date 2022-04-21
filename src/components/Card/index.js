@@ -17,12 +17,13 @@ const CardForm = () => {
 	const [birthdate, setBirthdate] = useState(new Date());
 	const [appointmentHour, setAppointmentHour] = useState();
 
-	const onSubmit = async (values) => {
+	const onSubmit = async (values, { resetForm }) => {
 		console.log(JSON.stringify(values, null, 2));
 		await axios.post("", values)
 			.then((response) => {
 				alert(response.data.message);
 				localStorePost(response.data.data);
+				resetForm();
 			})
 			.catch((error) => {
 				alert(error.response.data.message);
@@ -69,7 +70,6 @@ const CardForm = () => {
 							`}
 									</style>
 									<Form>
-							
 										<Box pt={1}>
 											<Field id="name" name="name" type="text" 
 												as={TextField} label="Nome" variant="filled" 
