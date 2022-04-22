@@ -64,10 +64,8 @@ const CardForm = () => {
 
 											border:none;
 											border-bottom:1px solid #757575;	  
-										}	
-										
-										
-							`}
+											}	
+										`}
 									</style>
 									<Form>
 										<Box pt={1}>
@@ -75,7 +73,7 @@ const CardForm = () => {
 												as={TextField} label="Nome" variant="filled" 
 												sx={{ display: "flex" , bgcolor: "white"}} focused
 											/>
-											<ErrorMessage name="name">
+											<ErrorMessage name="name" >
 												{ msg => <div style={{ color: "red" }}>{msg}</div> }
 											</ErrorMessage>
 										</Box>
@@ -84,7 +82,7 @@ const CardForm = () => {
 												as={TextField} label="Email" variant="filled" 
 												sx={{ display: "flex" , bgcolor: "white"}} focused
 											/>
-											<ErrorMessage name="email" >
+											<ErrorMessage name="email">
 												{ msg => <div style={{ color: "red" }}>{msg}</div> }
 											</ErrorMessage>
 										</Box>
@@ -92,13 +90,15 @@ const CardForm = () => {
 											<InputLabel sx={style.label}  htmlFor="birthdate">Data de Nascimento</InputLabel>
 											<DatePicker 
 												id="birthdate" 
+												data-testid= "appointmentHour"
 												name="birthdate" 
 												maxDate={currentDate}
-												value={values.birthdate}
-												selected={birthdate}
 												showYearDropdown
 												scrollableYearDropdown
+												value={values.birthdate} 
+												selected={birthdate}
 												locale={style.locale}
+												dateFormat="dd/MM/yyyy"
 												yearDropdownItemNumber={80}
 												wrapperClassName="date-picker"
 												onChange={(value) => {
@@ -106,10 +106,9 @@ const CardForm = () => {
 													setFieldValue("birthdate",value);
 													console.log(birthdate);
 												}}
-												className={TextField}
 											/>
 								
-											<ErrorMessage name="birthdate">
+											<ErrorMessage name="birthdate" >
 												{ msg => <div style={{ color: "red" }}>{msg}</div> }
 											</ErrorMessage>
 										</Box>
@@ -123,12 +122,12 @@ const CardForm = () => {
 														console.log(appointmentDate);
 													}}
 													wrapperClassName="date-picker"
-													excludeDates={[]}
+													dateFormat="dd/MM/yyyy"
 													locale={style.locale}
 													minDate={currentDate}
 													value={values.appointmentDate} 
 												/>
-												<ErrorMessage name="appointmentDate">
+												<ErrorMessage name="appointmentDate" >
 													{ msg => <div style={{ color: "red" }}>{msg}</div> }
 												</ErrorMessage>
 											</Grid>
@@ -149,12 +148,19 @@ const CardForm = () => {
 													dateFormat="h:mm aa"
 													value={values.appointmentHour} 
 												/>
-												<ErrorMessage name="appointmentHour">
+												<ErrorMessage name="appointmentHour" >
 													{ msg => <div style={{ color: "red" }}>{msg}</div> }
 												</ErrorMessage>
 											</Grid>
 										</Grid>
-										<Box pt={1.5}><Button type="submit" disabled={!isValid} variant="contained" sx={style.submit}>Agendar Vacina</Button></Box>
+										<Box pt={1.5}>
+											<Button 
+												type="submit" 
+												disabled={!isValid} 
+												variant="contained" 
+												sx={style.submit}
+											>Agendar Vacina</Button>
+										</Box>
 							
 									</Form>
 									

@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+# Desafio | Agendamento COVID-19 | Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> ## :memo: Features da Aplicação
 
-## Available Scripts
+* Portal com Create-React-App
+* Testes com Jest
+* Validações com Yup
+* Estilização com Material UI
+* Cliente HTTP Axios
 
-In the project directory, you can run:
+> ## :wrench: Como iniciar a aplicação
 
-### `npm start`
+Subindo localmente: 
+1. Execute na raiz do projeto o comando: npm run start
+2. A aplicação estará acessível no endereço localhost:3000
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+> ## :hammer: Funcionalidades do projeto
+> 1. Home
+* ✅ Redireciona o usuário para a tela desejada
 
-### `npm test`
+> 2. Lista agendamentos
+* ✅ Faz uma requisição do tipo **GET** para a **[API do Backend](https://github.com/GustavoPavanin/pitang-trainee-desafio-backend)**
+* ✅ Recebe os a lista de agendamentos cadastrados e grava em **Local Storage**
+* ✅ Dispôe os dados dos agendamentos da lista recebida em uma **Tabela**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+> 3. Formulário de agendamento
+* ✅ Apresenta os campos **Nome**, **E-mail**, **Data de Nascimento**, **Data de Agendamento**, **Horário de Agendamento**, além do botão **Agendar Vacina**
+* ✅ Recebe os dados e valida valores informados nos campos. OBS: **Todos os campos são obrigatórios, exceto E-mail**
+* ✅ Envia uma requisição do tipo **POST** para a **[API do Backend](https://github.com/GustavoPavanin/pitang-trainee-desafio-backend)** com os dados informados e validados.
+* ✅ Recebe o retorno da **API** e mostra na tela e atualiza o **Local Storage** (em caso de sucesso)
+* ✅ Limpa o formulário para que o próximo agendamento seja cadastrado
 
-### `npm run build`
+> 4. Confirmar agendamento
+* ✅ Na listagem de agendamentos, recebe o **ID** do agendamento
+* ✅ Abre um **Modal** na tela para que seja digitado um **comentário de conclusão** do agendamento
+* ✅ Valida o **comentário**, que não é obrigatório.
+* ✅ Envia uma requisição do tipo **PUT** para a **[API do Backend](https://github.com/GustavoPavanin/pitang-trainee-desafio-backend)** com os dados do agendamento, se o **comentário** não for preenchido, será enviado um genérico.
+* ✅ Atualiza o **Local Storage** (em caso de sucesso) e retorna para a Listagem de agendamentos.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
