@@ -5,6 +5,7 @@ import { Paper, TableRow, TableHead, TableContainer, TableBody, TableCell, Table
 import Modal from "./Modal";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import Tooltip from "@mui/material/Tooltip";
+import dateFormat from "../../Validation/dateSplit";
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
 	"&:nth-of-type(odd)": {
@@ -13,7 +14,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const TableComponent = ({ rows = []}) => {
-
 
 	return (
 		<div style={{ height: 400, width: "100%"}}>
@@ -35,10 +35,11 @@ const TableComponent = ({ rows = []}) => {
 							<StyledTableRow key={key}>
 								<TableCell align="center">{row.name}</TableCell>
 								<TableCell align="center">{row.email}</TableCell>
-								<TableCell align="center">{row.birthdate}</TableCell>
-								<TableCell align="center">{row.appointmentDate}</TableCell>
+								<TableCell align="center">{dateFormat(row.birthdate)}</TableCell>
+								<TableCell align="center">{dateFormat(row.appointmentDate)}</TableCell>
 								<TableCell align="center">{row.appointmentHour}</TableCell>
-								<TableCell align="center">{row.status ? "Concluído" : "Pendente"}</TableCell>
+								<TableCell align="center">{row.status ? "Concluído" : "Pendente"}
+								</TableCell>
 								<TableCell align="center">
 									<Modal id={row.id} disabled={row.status} />
 								</TableCell>
